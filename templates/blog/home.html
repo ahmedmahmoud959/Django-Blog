@@ -1,0 +1,143 @@
+{% extends '../base.html' %}
+{% load static %}
+{% load blog_tage %}
+{% block content %}
+    <section class="section first-section">
+        <div class="container-fluid">
+            <div class="masonry-blog clearfix">
+
+                <div class="first-slot">
+                    {% for f in post_first_head %}
+                        <div class="masonry-box post-media">
+                            {% if f.image_url %}
+                                <img src="{{f.image_url}}" alt="" class="img-fluid"/>
+                            {% else %}
+                                <img src="{{f.image_main.url}}" alt="" class="img-fluid"/>
+                            {% endif %}
+                                <div class="shadoweffect">
+                                <div class="shadow-desc">
+                                    <div class="blog-meta">
+                                        <span class="bg-orange"><a href="{% url 'category' f.category%}" title="">{{f.category}}</a></span>
+                                        <h4><a href="{% url 'post' f.title %}" title="">{{f.title}}</a></h4>
+                                        <small><a href="tech-single.html" title="">{{f.post_date|date:'Y-m-d'}}</a></small>
+                                        <small><a href="{{f.author}}" title="">{{f.author}}</a></small>
+                                    </div><!-- end meta -->
+                                </div><!-- end shadow-desc -->
+                            </div><!-- end shadow -->
+                        </div><!-- end post-media -->
+                    
+                    {% endfor %}
+                    
+                </div><!-- end first-side -->
+                
+                {% for top in post_head %}
+                    <div class="second-slot">
+                        <div class="masonry-box post-media">
+                                {% if top.image_url %}
+                                    <img src="{{top.image_url}}" alt="" class="img-fluid"/>
+                                {% else %}
+                                    <img src="{{top.image_main.url}}" alt="" class="img-fluid"/>
+                                {% endif %}
+                                    <div class="shadoweffect">
+                                    <div class="shadow-desc">
+                                        <div class="blog-meta">
+                                            <span class="bg-orange"><a href="{% url 'category' top.category%}" title="">{{top.category}}</a></span>
+                                            <h4><a href="{% url 'post' top.title %}" title="">{{top.title}}</a></h4>
+                                            <small><a href="tech-single.html" title="">{{top.post_date|date:'Y-m-d'}}</a></small>
+                                            <small><a href="{{topf.author}}" title="">{{top.author}}</a></small>
+                                        </div><!-- end meta -->
+                                    </div><!-- end shadow-desc -->
+                                </div><!-- end shadow -->
+                        </div><!-- end post-media -->
+                    </div><!-- end second-side -->
+                {% endfor %}
+                
+            </div><!-- end masonry -->
+        </div>
+    </section>
+    <section class="section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
+                    <div class="page-wrapper">
+                        <div class="blog-top clearfix">
+                            <h3 class="pull-right"><a href="#"><i class="fa fa-newspaper-o"></i>أخر الأخبار </i></a></h3>
+                        </div><!-- end blog-top -->
+
+                        <div class="blog-list clearfix">
+                            
+                            {% for p in post %}
+                                <hr class="invis">
+                                <div class="blog-box row">
+                                    <div class="col-md-4">
+                                        <div class="post-media">
+                                            <a href="{% url 'post' p.title %}" title="">
+                                            {% if p.image_url %}
+                                                <img src="{{p.image_url}}" alt="" class="img-fluid">
+                                            {% else %}
+                                                <img src="{{p.image_main.url}}" alt="" class="img-fluid">
+                                            {% endif %}
+                                                
+                                                <div class="hovereffect"></div>
+                                            </a>
+                                        </div><!-- end media -->
+                                    </div><!-- end col -->
+
+                                    <div class="blog-meta big-meta col-md-8">
+                                        <h4><a href="{% url 'post' p.title %}" title="">{{p.title}}</a></h4>
+                                        <p>{{p.description}}</p>
+                                        <small class="firstsmall"><a class="bg-orange" href="{% url 'category' p.category%}" title="">{{p.category}}</a></small>
+                                        <small><a href="tech-single.html" title="">{{p.post_date|date:'Y-m-d'}}</a></small>
+                                        <small><a href="tech-author.html" title="">{{p.author}}</a></small>
+                                        <small><a href="tech-single.html" title=""><i class="fa fa-eye"></i> {{p.views}}</a></small>
+                                    </div><!-- end meta -->
+                                </div><!-- end blog-box -->
+
+                                {% if p.ads_num == 0%}
+                                    
+                                  <hr class="invis">
+                                    <div class="row">
+                                        <div class="col-lg-10 offset-lg-1">
+                                            <div class="banner-spot clearfix">
+                                                <div class="banner-img">
+                                                    <img src=" {% static 'blog/upload/banner_02.jpg' %}" alt="" class="img-fluid">
+                                                </div><!-- end banner-img -->
+                                            </div><!-- end banner -->
+                                        </div><!-- end col -->
+                                    </div><!-- end row --> 
+                                
+                                {% endif %}
+                                    
+                                    
+                                
+                            
+                            {% endfor %}
+                            
+
+                            
+                        </div><!-- end blog-list -->
+                    </div><!-- end page-wrapper -->
+
+                    <hr class="invis">
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <nav aria-label="Page navigation">
+                                <ul class="pagination justify-content-start">
+                                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                    <li class="page-item">
+                                        <a class="page-link" href="#">Next</a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div><!-- end col -->
+                    </div><!-- end row -->
+                </div><!-- end col -->
+                {% side_bar %}
+            </div><!-- end row -->
+        </div><!-- end container -->
+    </section>
+
+{% endblock content %}
